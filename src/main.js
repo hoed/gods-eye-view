@@ -107,10 +107,13 @@ async function init() {
         document.body.appendChild(el);
         return el;
       })(),
-      msaaSamples: 4,
+      // Keep context creation compatible with software-rendered and
+      // containerized browsers. The render governor already controls frame
+      // cost, so forcing multisampling here only reduces startup reliability.
+      msaaSamples: 1,
       contextOptions: {
         webgl: {
-          preserveDrawingBuffer: true,
+          antialias: false,
         },
       },
     });
