@@ -19,7 +19,7 @@
  *  14. Rocket launches — recent Launch Library 2 mission metadata
  *  15. Radio Browser — public-domain station directory and click counting
  *
- * Also exposes Cesium and Google 3D Tiles API keys to the
+ * Also exposes the optional Cesium ion and Google enrichment keys to the
  * client via `import.meta.env.*` defines.
  *
  * @module vite.config

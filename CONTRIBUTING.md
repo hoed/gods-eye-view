@@ -12,10 +12,10 @@ cd gods-eye-view
 nvm install 24.14.0
 nvm use 24.14.0
 npm install
-./scripts/dev-fresh.sh        # or: GOOGLE_MAPS_API_KEY="…" npm run dev
+./scripts/dev-fresh.sh        # no map API key required
 ```
 
-You need a **Google Maps API key** with the Map Tiles API enabled (see the [README](README.md#-api-keys)). Most data layers work with no other accounts. On macOS the launcher pulls keys from the Keychain; on any platform you can pass them as env vars or use a `.env` (copy `.env.example`).
+The default OpenStreetMap basemap needs no API key. A Google Maps key is optional for Places enrichment and Street View fallback (see the [README](README.md#-api-keys)). On macOS the launcher pulls keys from the Keychain; on any platform you can pass them as env vars or use a `.env` (copy `.env.example`).
 
 Open `http://localhost:4173`. Before sending a PR run `npm run build`, `npm test`, and `npm run test:track` (dev server must be up) — **all three must stay green.**
 
