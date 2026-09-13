@@ -32,6 +32,7 @@ import {
 } from './renderGovernor.js';
 import { installScopeMask } from './scopeMask.js';
 import { initFirstRunExperience } from './firstRunExperience.js';
+import { startLeafletFallback } from './leafletFallback.js';
 
 initLogoGaze();
 
@@ -300,8 +301,20 @@ async function init() {
 
   } catch (error) {
     console.error("God's Eye View initialization failed:", error);
-    loaderStatus.textContent = `Error: ${describeError(error)}`;
-    loaderStatus.style.color = '#ff4444';
+    loaderStatus.textContent = 'WebGL unavailable · starting Leaflet fallback...';
+    loaderStatus.style.color = '#ffcc66';
+    try {
+      const fallback = startLeafletFallback({
+        container: document.getElementById('cesiumContainer'),
+        status: loaderStatus,
+      });
+      window.__godsEyeView = { leaflet: fallback, mode: 'leaflet-fallback', error };
+      document.getElementById('loading-screen')?.classList.add('hidden');
+    } catch (fallbackError) {
+      console.error("God's Eye View Leaflet fallback failed:", fallbackError);
+      loaderStatus.textContent = `Error: ${describeError(error)}`;
+      loaderStatus.style.color = '#ff4444';
+    }
   }
 }
 
